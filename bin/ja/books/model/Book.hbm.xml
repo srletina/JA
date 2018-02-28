@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="ja.books.model">
+	<class name="Book" table="BOOK">
+		<id name="idBook" column="IDBook" type="integer">
+			<generator class="increment" />
+		</id>
+		<property name="isbn" type="string" column="Isbn" />
+		<property name="title" type="string" column="Title" />
+		<property name="author" type="string" column="Author" />
+	</class>
+</hibernate-mapping>

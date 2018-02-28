@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<GridPane fx:id="gridPaneBookDetails" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ja.books.books.BookDetailsController">
+	<columnConstraints>
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+	</rowConstraints>
+	<children>
+		<Label text="ISBN" textAlignment="CENTER">
+			<GridPane.margin> <Insets /> </GridPane.margin>
+		</Label>
+		<Label text="Title" GridPane.rowIndex="1" />
+		<Label text="Author" GridPane.rowIndex="2" />
+		<TextField fx:id="tfIsbn" GridPane.columnIndex="1" />
+		<TextField fx:id="tfTitle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+		<TextField fx:id="tfAuthor" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+	</children>
+	<padding>
+		<Insets right="10.0" />
+	</padding>
+</GridPane>

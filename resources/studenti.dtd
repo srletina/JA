@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT studenti (student+)>
+	<!ELEMENT student (mat_broj, ime, prezime, godina_studija)>
+		<!ELEMENT mat_broj (#PCDATA)>
+		<!ELEMENT ime (#PCDATA)>
+		<!ELEMENT prezime (#PCDATA)>
+		<!ELEMENT godina_studija (#PCDATA)>
+	<!ATTLIST student tip CDATA #REQUIRED>

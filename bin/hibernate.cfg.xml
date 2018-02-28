@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.driver.class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="connection.url">
+			jdbc:mysql://localhost/books
+		</property>
+		<property name="connection.username">
+			root
+		</property>
+		<property name="connection.password">
+			mysql0ja
+		</property>
+		<property name="show_sql">true</property>
+
+		<mapping resource="ja/books/model/Book.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+
+<element name="studenti">
+	<complexType>
+		<sequence>
+			<element name="student" minOccurs="0" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="mat_broj" type="string" />
+						<element name="prezime" type="string" />
+						<element name="ime" type="string" />
+						<element name="godina_studija" type="int" />
+					</sequence>
+					<attribute name="tip" use="required" />
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+</element>
+</schema>

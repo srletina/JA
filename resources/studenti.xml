@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<studenti>
+	<student tip="redovni">
+		<mat_broj>123</mat_broj>
+		<prezime>bele</prezime>
+		<ime>daniel</ime>
+		<godina_studija>4</godina_studija>
+	</student>	
+	<student tip="izvanredni">
+		<mat_broj>321</mat_broj>
+		<prezime>grabar-kitarović</prezime>
+		<ime>kolinda</ime>
+		<godina_studija>1</godina_studija>
+	</student>	
+	<student tip="redovni">
+		<mat_broj>312</mat_broj>
+		<ime>vlatka</ime>
+		<prezime>pokos</prezime>
+		<godina_studija>5</godina_studija>
+	</student>	
+</studenti>
+

@@ -1,0 +1,17 @@
+#borderPaneBooks{
+	-fx-font-size: 10pt;
+	-fx-font-family: "Courier New";
+	-fx-background-color: lightblue;
+}
+
+#button:hover {
+	-fx-background-color: linear-gradient(#2A5058, #61A2B1);
+}
+
+#gridPaneBookDetails{
+	-fx-padding: 5pt;
+	-fx-font-size: 10pt;
+	-fx-font-family: "Courier New";
+	-fx-background-color: lightcoral;
+}
+
