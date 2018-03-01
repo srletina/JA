@@ -15,7 +15,9 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.Axis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.ScrollPane;
@@ -42,47 +44,51 @@ public class ResizableChartWithinScrollPane extends Application {
 
         Random random = new Random(12);
 
-        NumberAxis xAxis = new NumberAxis("Time: s", 0, 4, 1);
+        Axis<Number> xAxis = new NumberAxis("Time: s", 0, 4, 1);
         xAxis.setAutoRanging(false);
         NumberAxis yAxis = new NumberAxis();
 
-        //final ObservableList<Data> seriesData = FXCollections.observableArrayList();
-        final ObservableList<Data<String, ObservableList<String>>> seriesData = FXCollections.observableArrayList();
-        Series<String, ObservableList<String>> series = new Series<>("Rotation", seriesData);
-
-        final ObservableList<Data> series2Data = FXCollections.observableArrayList();
-        Series series2 = new Series("Speed", series2Data);
-
+//        ObservableList<Data<Double, Integer>> seriesData = FXCollections.observableArrayList();
+//        XYChart.Series<Double, Integer> series = new XYChart.Series<>("Rotation", seriesData);
+//        ObservableList<Data<Double, Integer>> series2Data = FXCollections.observableArrayList();
+//        XYChart.Series<Double, Integer> series2 = new XYChart.Series<>("Speed", series2Data);
+        ObservableList<Data<Number, Number>> seriesData = FXCollections.observableArrayList();
+        XYChart.Series<Number, Number> series = new XYChart.Series<>("Rotation", seriesData);
+        ObservableList<Data<Number, Number>> series2Data = FXCollections.observableArrayList();
+        XYChart.Series<Number, Number> series2 = new XYChart.Series<>("Speed", series2Data);
 
         double tempoXAxis = 0.0;
 
         for (int i = 0; i < 100; i++) {
-            seriesData.add(new Data(tempoXAxis, random.nextInt(12)));
-            series2Data.add(new Data(tempoXAxis, random.nextInt(12)));
+            seriesData.add(new Data<>(tempoXAxis, random.nextInt(12)));
+            series2Data.add(new Data<>(tempoXAxis, random.nextInt(12)));
             tempoXAxis += 0.04;
         }
 
-        final ObservableList<Series> allSeriesData = FXCollections.observableArrayList(series, series2);
+        //ObservableList allSeriesData = FXCollections.observableArrayList(series, series2);
+        //ObservableList<Series<Number, Number>> allSeriesData = FXCollections.observableArrayList(series, series2);
+        ObservableList<Series<Number, Number>> allSeriesData = FXCollections.observableArrayList();
+        allSeriesData.add(series);
+        allSeriesData.add(series2);
 
-        final AreaChart chart = new AreaChart(xAxis, yAxis);
-
-        chart.getData().addAll(allSeriesData);
-        chart.setPrefSize(500, 200);
+        final AreaChart<Number, Number> areaChart = new AreaChart<>(xAxis, yAxis);
+        areaChart.getData().addAll(allSeriesData);
+        areaChart.setPrefSize(500, 200);
 
         final ScrollPane pane = new ScrollPane();
-        pane.setContent(chart);
+        pane.setContent(areaChart);
         pane.setPrefSize(600, 300);
 
-        pane.setContent(chart);
+        pane.setContent(areaChart);
         pane.viewportBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
             public void changed(ObservableValue<? extends Bounds> observableValue, Bounds oldBounds, Bounds newBounds) {
-                chart.setMinSize(Math.max(chart.getPrefWidth(), newBounds.getWidth()), Math.max(chart.getPrefHeight(), newBounds.getHeight()));
-                pane.setPannable((chart.getPrefWidth() > newBounds.getWidth()) || (chart.getPrefHeight() > newBounds.getHeight()));
+            	areaChart.setMinSize(Math.max(areaChart.getPrefWidth(), newBounds.getWidth()), Math.max(areaChart.getPrefHeight(), newBounds.getHeight()));
+                pane.setPannable((areaChart.getPrefWidth() > newBounds.getWidth()) || (areaChart.getPrefHeight() > newBounds.getHeight()));
             }
         });
 
-        chart.setOnScroll(new EventHandler<ScrollEvent>() {
+        areaChart.setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
             public void handle(ScrollEvent ev) {
                 double zoomFactor = 1.05;
@@ -96,7 +102,7 @@ public class ResizableChartWithinScrollPane extends Application {
                 System.out.println("DeltaY = " + ev.getDeltaY());
                 System.out.println("Zoomfactor = " + zoomFactor);
 
-                NumberAxis xAxisLocal = ((NumberAxis) chart.getXAxis());
+                NumberAxis xAxisLocal = ((NumberAxis) areaChart.getXAxis());
 
                 xAxisLocal.setUpperBound(xAxisLocal.getUpperBound() * zoomFactor);
                 xAxisLocal.setLowerBound(xAxisLocal.getLowerBound() * zoomFactor);
