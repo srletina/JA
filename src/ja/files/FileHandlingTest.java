@@ -36,17 +36,17 @@ public class FileHandlingTest {
 		System.out.println(path4);
 		System.out.println();
 
-		String target = path.resolve(fileName).toString();
-		Path target2 = path.resolve(fileName2);
-		File target3 = new File(path.toString(), fileName.toString());
-		System.out.println(target);
-		System.out.println(target2);
-		System.out.println(target3);
+		String targetString = path.resolve(fileName).toString();
+		Path targetPath = path.resolve(fileName2);
+		File file = new File(path.toString(), fileName.toString());
+		System.out.println(targetString);
+		System.out.println(targetPath);
+		System.out.println(file);
 		System.out.println();
 
 		String outString = "ajmo!";
 
-		RandomAccessFile fajlic = new RandomAccessFile(target, "rw");
+		RandomAccessFile fajlic = new RandomAccessFile(targetString, "rw");
 		fajlic.seek(fajlic.length());
 		//fajlic.writeBytes(outString);
 		fajlic.writeUTF(outString);
@@ -54,20 +54,20 @@ public class FileHandlingTest {
 		fajlic.close();
 
 		//PrintWriter out = new PrintWriter(targetFileName2);
-		PrintWriter out = new PrintWriter(new FileOutputStream(target2.toString(), true));
+		PrintWriter out = new PrintWriter(new FileOutputStream(targetString, true));
 		out.println(outString);
 		out.close();
 
 		//Files.write(target2, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
-		Files.write(target2, outString.getBytes(), StandardOpenOption.APPEND);
+		Files.write(targetPath, outString.getBytes(), StandardOpenOption.APPEND);
 
-		Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(target, true), "utf-8"));
+		Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(targetString, true), "utf-8"));
 		writer.write("something");
 		writer.close();
 
-		//File file = new File("targetFileName");
-		//file.setWritable(false));
 		//file.setReadOnly();
+		//file.setWritable(false);
+		file.setWritable(true);
 
 	}
 }
