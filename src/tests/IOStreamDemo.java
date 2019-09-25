@@ -22,18 +22,14 @@ public class IOStreamDemo {
 	// Throw exceptions to console:
 	public static void main(String[] args) throws IOException {
 		// 1. Reading input by lines:
-		BufferedReader in =
-				new BufferedReader(
-						new FileReader("IOStreamDemo.java"));
+		BufferedReader in = new BufferedReader(new FileReader("IOStreamDemo.java"));
 		String s, s2 = new String();
 		while((s = in.readLine())!= null)
 			s2 += s + "\n";
 		in.close();
 
 		// 1b. Reading standard input:
-		BufferedReader stdin =
-				new BufferedReader(
-						new InputStreamReader(System.in));
+		BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("Enter a line:");
 		System.out.println(stdin.readLine());
 
@@ -45,9 +41,7 @@ public class IOStreamDemo {
 
 		// 3. Formatted memory input
 		try {
-			DataInputStream in3 =
-					new DataInputStream(
-							new ByteArrayInputStream(s2.getBytes()));
+			DataInputStream in3 = new DataInputStream(new ByteArrayInputStream(s2.getBytes()));
 			while(true)
 				System.out.print((char)in3.readByte());
 		} catch(EOFException e) {
