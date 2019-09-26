@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" stylesheets="@prvaforma.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testfx.prvaforma.PrvaFormaController">
+   <children>
+      <ImageView layoutY="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@brod.png" />
+         </image>
+      </ImageView>
+      <SplitPane dividerPositions="0.3283208020050125" layoutX="209.0" layoutY="148.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="148.0">
+        <items>
+          <AnchorPane prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <TreeView id="tree" layoutY="99.0" styleClass="blackTree" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane id="detail" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="598.0" prefWidth="625.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane maxHeight="200.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TableView id="table" layoutX="-14.0" minHeight="100.0" minWidth="100.0" prefHeight="111.0" prefWidth="605.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: rgba(95.0, 158.0, 160.0, 0.9);">
+                           <children>
+                              <Canvas fx:id="platno" height="320.0" layoutX="14.0" layoutY="14.0" width="480.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <Button fx:id="fuckOff" layoutX="507.0" layoutY="72.0" mnemonicParsing="false" onAction="#fuckOff" styleClass="roundedButton" text="Fuck off" />
+      <Button fx:id="fuckOn" layoutX="605.0" layoutY="72.0" mnemonicParsing="false" onAction="#fuckOn" text="Fuck on" />
+      <HBox fillHeight="false" layoutX="336.0" layoutY="14.0" prefHeight="31.0" prefWidth="610.0" AnchorPane.bottomAnchor="675.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <Hyperlink id="label" layoutY="14.0" text="PROJECT" />
+            <Label layoutX="69.0" layoutY="14.0" text="/" />
+            <Hyperlink id="bugId" layoutX="79.0" layoutY="14.0" text="ID" />
+            <TextField id="synopsis" fx:id="synopsis" minWidth="-Infinity" prefHeight="31.0" prefWidth="510.0" promptText="SYNOPSIS" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
