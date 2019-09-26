@@ -14,26 +14,28 @@ public class Primarno {
 		// $100,000 to the first individual or group who discovers a prime number with at least 10,000,000 decimal digits (awarded Oct. 22, 2009)
 		// $150,000 to the first individual or group who discovers a prime number with at least 100,000,000 decimal digits
 		// $250,000 to the first individual or group who discovers a prime number with at least 1,000,000,000 decimal digits
+		
+		// ispada da je brute force smješan algoritam prema ovome što se koristi za odrediti primarni broj....
 
-		final int target = 1000000;
+		final int target = 100000;
+		int i, candidate, primarnih, enough;
+
+		System.out.println(String.format("Primarni brojevi.\nMetode: Memorija, eksplicitni algoritam, optimizirano, jako optimizirano"));
+
+		startTimer();
 		int primarni[] = new int[target];
 		primarni[0] = 2;
-		int primarnih = 1;
-		int i, dovoljno;
+		candidate = 3;
+		primarnih = 1;
 		//int delta;
-		int maxDelta = 0;
-		long deltaAvg = 0;
-
-
-		LocalTime start = LocalTime.now();
-		System.out.println(String.format("Primarni brojevi:\n1: 2"));
-		int kandidat = 3;
+		//int maxDelta = 0;
+		//long deltaAvg = 0;
 		while (primarnih < target)
 		{	// kandidat za provjeru je kandidat
-			dovoljno = (int) Math.sqrt(kandidat);
+			enough = (int) Math.sqrt(candidate);
 			i = 0;
 			while (i < primarnih) {
-				if (kandidat % primarni[i] == 0) {
+				if (candidate % primarni[i] == 0) {
 					// not a primary number
 					// double-check
 					//if (isPrimeFaster(kandidat) == false) {
@@ -41,8 +43,8 @@ public class Primarno {
 					//}
 					break;
 				}
-				if (primarni[i] >= dovoljno) {
-					primarni[primarnih] = kandidat;
+				if (primarni[i] >= enough) {
+					primarni[primarnih] = candidate;
 					//delta = kandidat - primarni[primarnih - 1];
 					//deltaAvg += delta;
 					//if (maxDelta < delta) {
@@ -58,46 +60,48 @@ public class Primarno {
 				}
 				i++;
 			}
-			kandidat++;
+			candidate++;
 		}
-		LocalTime end = LocalTime.now();
-		System.out.println(String.format("%d primarnih brojeva, zadnji je %d=%d, maxDelta=%d, deltaAvg=%d", target, kandidat - 1, primarni[primarnih - 1], maxDelta, deltaAvg/target));
-		System.out.println("Time: " + start.until(end, ChronoUnit.MILLIS));
+		stopTimer();
+		//System.out.println(String.format("%d primarnih brojeva, zadnji je %d=%d, maxDelta=%d, deltaAvg=%d", target, candidate - 1, primarni[primarnih - 1], maxDelta, deltaAvg/target));
+		System.out.println(String.format("%d primarnih brojeva, zadnji je %d", primarnih, candidate - 1));
+		System.out.println("Time: " + duration);
 
-		start = LocalTime.now();
-		kandidat = 0;
+		
+		startTimer();
+		candidate = 0;
 		primarnih = 0;
 		for(;;) { // fastest loop 
-			if (isPrime(kandidat++)) {
+			if (isPrime(candidate++)) {
 				primarnih++;
 				if (primarnih >= target) {
 					break;
 				}
 			}
 		}
-		end = LocalTime.now();
-		System.out.println(String.format("%d primarnih brojeva, zadnji je %d", primarnih, kandidat - 1));
-		System.out.println("Time: " + start.until(end, ChronoUnit.MILLIS));
+		stopTimer();
+		System.out.println(String.format("%d primarnih brojeva, zadnji je %d", primarnih, candidate - 1));
+		System.out.println("Time: " + duration);
 
 
-		start = LocalTime.now();
-		kandidat = 0;
+		startTimer();
+		candidate = 0;
 		primarnih = 0;
-		for(;;) {
-			//while(true) {
-			if (isPrimeFast(kandidat++)) {
+		for(;;) { // fastest loop 
+			if (isPrimeFast(candidate++)) {
 				primarnih++;
 				if (primarnih >= target) {
 					break;
 				}
 			}
 		}
-		end = LocalTime.now();
-		System.out.println(String.format("%d primarnih brojeva, zadnji je %d", primarnih, kandidat - 1));
-		System.out.println("Time: " + start.until(end, ChronoUnit.MILLIS));
+		stopTimer();
+		System.out.println(String.format("%d primarnih brojeva, zadnji je %d", primarnih, candidate - 1));
+		System.out.println("Time: " + duration);
 
 
 		ThreadMXBean bean = ManagementFactory.getThreadMXBean( );
+		LocalTime start, end;
 		long start2, start3;
 		long end2, end3;
 		long fastest = -1;
@@ -110,14 +114,13 @@ public class Primarno {
 			start = LocalTime.now();
 			start2 = bean.getCurrentThreadCpuTime();
 			start3 = bean.getCurrentThreadUserTime();
-			kandidat = 0;
+			candidate = 0;
 			primarnih = 0;
 			for(;;) {
-				//while(true) {
-				if (isPrimeFaster(kandidat++)) {
-				//primarnih++;
-				if (++primarnih >= target) {
-						break;
+				if (isPrimeFaster(candidate++)) {
+					primarnih++;
+					if (primarnih >= target) {
+							break;
 					}
 				}
 			}
@@ -142,9 +145,9 @@ public class Primarno {
 			System.out.print(diff + "<->" + diff2 + "<->" + diff3 + "..");
 		}
 		System.out.println();
-		System.out.println("Fastest/Average: " + fastest + "/" + avg/10);
-		System.out.println("Fastest/Average2: " + fastest2 + "/" + avg2/10);
-		System.out.println("Fastest/Average3: " + fastest3 + "/" + avg3/10);
+		System.out.println("Fastest/Average time: " + fastest + "/" + avg/10);
+		System.out.println("Fastest/Average time2: " + fastest2 + "/" + avg2/10);
+		System.out.println("Fastest/Average time3: " + fastest3 + "/" + avg3/10);
 	}
 
 
@@ -164,16 +167,15 @@ public class Primarno {
 
 
 	public static boolean isPrimeFast(int candidate) {
-		// negative numbers are not allowed, and 0 & 1 are not primes
-		if (candidate < 2) {
-			return false;
-		}
-		// 2 is prime
-		if (candidate == 2) {
-			return true;
+		// negative numbers are not allowed, and 0 & 1 are not primes, 2 is prime
+		if (candidate < 3) {
+			if (candidate == 2)
+				return true;
+			else
+				return false;
 		}
 		// even numbers aren't prime numbers (except 2)
-		if ((candidate % 2) == 0) {
+		if ((candidate & 1) == 0) {
 			return false;
 		}
 		// check odd ones from 3 to SQR(candidate)
@@ -244,5 +246,17 @@ public class Primarno {
 				return true;
 			}
 		}
+	}
+
+
+	static LocalTime startLT;
+	static long duration;
+	
+	private static void startTimer() {
+		startLT = LocalTime.now();
+	}
+	
+	private static void stopTimer() {
+		duration = startLT.until(LocalTime.now(), ChronoUnit.MILLIS);
 	}
 }
